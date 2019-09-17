@@ -9,30 +9,51 @@ namespace NodeBuilder.Library
     {
         public static Node<T> ToNode<T>(this IEnumerable<T> items, Func<T, string> pathAccessor, char pathSeparator = '\\')
         {
-            var nodeable = items.Select(i => new Nodeable<T>()
+            var folderedItems = items.Select(item =>
             {
-                Item = i,
-                Folders = pathAccessor.Invoke(i).Split(new char[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries).ToArray()
+                var folders = pathAccessor.Invoke(item).Split(new char[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                return new NodeAnalyzer()
+                {
+                    Name = folders.First(),
+                    RemainingFolders = folders.Skip(1)
+                };
             });
 
-            int maxDepth = nodeable.Max(i => i.Folders.Length);
-
             Node<T> root = new Node<T>();
-
-            GetChildNodes(root, 0, nodeable);
-
+            root.Children = GetChildNodesR(root, folderedItems);
             return root;
         }
 
-        private static IEnumerable<Node<T>> GetChildNodes<T>(Node<T> parent, int level, IEnumerable<Nodeable<T>> nodeables)
+        private static IEnumerable<Node<T>> GetChildNodesR<T>(Node<T> parent, IEnumerable<NodeAnalyzer> items)
         {            
-            var folderedItems = nodeables.GroupBy(item => item.Folders[level]);
+            List<Node<T>> results = new List<Node<T>>();
 
-            parent.Children = folderedItems.Select(grp => new Node<T>()
+            results.AddRange(items
+                .GroupBy(item => item.Name)
+                .Select(grp => new Node<T>()
+                {
+                    Name = grp.Key                    
+                }));
+
+            foreach (var node in results)
             {
-                Name = grp.Key,
-                Children = grp.Select(item => )
-            });            
+
+            }
+
+            return results;
+        }
+
+        private static IEnumerable<NodeAnalyzer> GetFolderedItems<T>(IEnumerable<T> items, Func<T, string> pathAccessor, char pathSeparator)
+        {
+            return items.Select(item =>
+            {
+                var folders = pathAccessor.Invoke(item).Split(new char[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                return new NodeAnalyzer()
+                {                    
+                    Name = folders.First(),
+                    RemainingFolders = folders.Skip(1)
+                };
+            });
         }
     }
 }

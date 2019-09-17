@@ -20,10 +20,9 @@ namespace Tests
             };
 
             var node = items.ToNode((s) => s, '/');
-            Assert.IsTrue(node.Children.SequenceEqual(new string[]
+            Assert.IsTrue(node.Children.Select(nd => nd.Name).SequenceEqual(new string[]
             {
-                "this",
-                "yambo"
+                "this", "yambo"
             }));
         }
     }
