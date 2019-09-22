@@ -2,13 +2,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using NodeBuilder.Library;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace Tests
 {
     [TestClass]
-    public class NodeTests
+    public class FolderTests
     {
         [TestMethod]
         public void SimpleCase()

@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NodeBuilder.Library\NodeBuilder.Library.csproj" />
+    <ProjectReference Include="..\FolderBuilder.Library\FolderBuilder.Library.csproj" />
   </ItemGroup>
 
 </Project>
