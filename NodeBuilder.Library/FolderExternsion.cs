@@ -27,7 +27,7 @@ namespace NodeBuilder.Library
 
             Folder<T> root = new Folder<T>();
             root.Folders = GetChildFoldersR(root, folderedItems, new Stack<string>());
-            root.Items = GetItemsAtPath<T>(new Stack<string>(), folderedItems);
+            root.Items = GetItemsAtPath(string.Empty, folderedItems);
             return root;
         }
 
@@ -45,11 +45,11 @@ namespace NodeBuilder.Library
                     var result = new Folder<T>()
                     {
                         Name = grp.Key,
-                        Items = GetItemsAtPath(path, grp)
+                        Items = GetItemsAtPath(grp.Key, grp)
                     };                    
 
                     var nestedItems = grp
-                        .Where(item => item.RemainingFolders.Any())
+                        .Where(item => item.RemainingFolders.Count() >= 2)
                         .Select(item => new FolderAnalyzer<T>
                         {
                             Item = item.Item,
@@ -66,11 +66,11 @@ namespace NodeBuilder.Library
             return results;
         }
 
-        private static IEnumerable<T> GetItemsAtPath<T>(Stack<string> path, IEnumerable<FolderAnalyzer<T>> items)
+        private static IEnumerable<T> GetItemsAtPath<T>(string folderName, IEnumerable<FolderAnalyzer<T>> items)
         {            
             return items
-                .Where(item => path.SequenceEqual(item.RemainingFolders))
-                .Select(leaf => leaf.Item).ToArray();
+                .Where(item => item.Name.Equals(folderName) && item.RemainingFolders.Count() == 1)
+                .Select(leaf => leaf.Item).ToArray();                           
         }
     }
 }

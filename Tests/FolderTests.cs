@@ -20,12 +20,7 @@ namespace Tests
                 "yambo/yilma/hoopla/thalamus.json"
             };
 
-            var folder = items.ToFolder((s) => s, '/');
-            Assert.IsTrue(folder.Folders.Select(nd => nd.Name).SequenceEqual(new string[]
-            {
-                "this", "yambo"
-            }));
-
+            var folder = items.ToFolder((s) => s);
             var json = JsonConvert.SerializeObject(folder);
         }
 
@@ -41,7 +36,7 @@ namespace Tests
             };
 
             var folder = items.ToFolder((s) => s);
-            var json = JsonConvert.SerializeObject(folder);
+            var json = JsonConvert.SerializeObject(folder);            
         }
     }
 }
