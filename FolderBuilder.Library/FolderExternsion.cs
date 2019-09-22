@@ -26,12 +26,12 @@ namespace FolderBuilder.Library
             }).ToArray();            
 
             Folder<T> root = new Folder<T>();
-            root.Folders = GetChildFoldersR(root, folderedItems, new Stack<string>());
+            root.Folders = GetChildFoldersR(folderedItems);
             root.Items = GetLeafItems(string.Empty, folderedItems);
             return root;
         }
 
-        private static IEnumerable<Folder<T>> GetChildFoldersR<T>(Folder<T> parent, IEnumerable<FolderAnalyzer<T>> items, Stack<string> path)
+        private static IEnumerable<Folder<T>> GetChildFoldersR<T>(IEnumerable<FolderAnalyzer<T>> items)
         {
             List<Folder<T>> results = new List<Folder<T>>();
 
@@ -40,8 +40,6 @@ namespace FolderBuilder.Library
                 .GroupBy(item => item.Name)
                 .Select(grp => 
                 {
-                    path.Push(grp.Key);
-
                     var result = new Folder<T>()
                     {
                         Name = grp.Key,
@@ -57,9 +55,8 @@ namespace FolderBuilder.Library
                             RemainingFolders = item.RemainingFolders.Skip(1).ToArray()
                         }).ToArray();
                     
-                    result.Folders = GetChildFoldersR(result, nestedItems, path);                    
-
-                    path.Pop();
+                    result.Folders = GetChildFoldersR(nestedItems);                    
+                    
                     return result;
                 }));
 
