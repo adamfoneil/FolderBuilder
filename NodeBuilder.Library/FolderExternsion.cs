@@ -25,12 +25,15 @@ namespace NodeBuilder.Library
                 };
             });
 
+            int maxLevel = folderedItems.Max(item => item.RemainingFolders.Count());
+
             Folder<T> root = new Folder<T>();
-            root.Folders = GetChildFoldersR(root, folderedItems);
+            root.Folders = GetChildFoldersR(root, folderedItems, 0, maxLevel);
+            root.Items = GetItemsAtDepth<T>(0, folderedItems);
             return root;
         }
 
-        private static IEnumerable<Folder<T>> GetChildFoldersR<T>(Folder<T> parent, IEnumerable<FolderAnalyzer<T>> items)
+        private static IEnumerable<Folder<T>> GetChildFoldersR<T>(Folder<T> parent, IEnumerable<FolderAnalyzer<T>> items, int currentLevel, int maxLevel)
         {            
             List<Folder<T>> results = new List<Folder<T>>();
 
@@ -38,15 +41,33 @@ namespace NodeBuilder.Library
                 .GroupBy(item => item.Name)
                 .Select(grp => new Folder<T>()
                 {
-                    Name = grp.Key                    
+                    Name = grp.Key,
+                    Items = GetItemsAtDepth(currentLevel, grp)
                 }));
 
-            foreach (var folder in results)
+            if (currentLevel < maxLevel)
             {
-                //folder.Folders = GetChildFoldersR<T>(folder, )
+                var nestedItems = items.Select(item => new FolderAnalyzer<T>()
+                {
+                    Item = item.Item,
+                    Name = item.RemainingFolders.First(),
+                    RemainingFolders = item.RemainingFolders.Skip(1)
+                });
+
+                foreach (var folder in results)
+                {
+                    currentLevel++;
+                    folder.Folders = GetChildFoldersR<T>(folder, nestedItems, currentLevel, maxLevel);
+                    currentLevel--;
+                }
             }
 
             return results;
+        }
+
+        private static IEnumerable<T> GetItemsAtDepth<T>(int level, IEnumerable<FolderAnalyzer<T>> items)
+        {
+            return items.Where(item => !item.RemainingFolders.Any()).Select(leaf => leaf.Item);
         }
     }
 }
