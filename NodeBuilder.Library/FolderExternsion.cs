@@ -9,7 +9,7 @@ namespace NodeBuilder.Library
     {
         public static Folder<T> ToFolder<T>(this IEnumerable<T> items, Func<T, string> pathAccessor, params char[] pathSeparators)
         {
-            if (pathSeparators == null) pathSeparators = new char[] { '\\', '/', ':', '.' };
+            if (!pathSeparators?.Any() ?? true) pathSeparators = new char[] { '\\', '/', ':' };
 
             var folderedItems = items.Select(item =>
             {
@@ -21,53 +21,56 @@ namespace NodeBuilder.Library
                 {
                     Item = item,
                     Name = folders.First(),
-                    RemainingFolders = folders.Skip(1)
+                    RemainingFolders = folders.Skip(1).ToArray()
                 };
-            });
-
-            int maxLevel = folderedItems.Max(item => item.RemainingFolders.Count());
+            }).ToArray();            
 
             Folder<T> root = new Folder<T>();
-            root.Folders = GetChildFoldersR(root, folderedItems, 0, maxLevel);
-            root.Items = GetItemsAtDepth<T>(0, folderedItems);
+            root.Folders = GetChildFoldersR(root, folderedItems, new Stack<string>());
+            root.Items = GetItemsAtPath<T>(new Stack<string>(), folderedItems);
             return root;
         }
 
-        private static IEnumerable<Folder<T>> GetChildFoldersR<T>(Folder<T> parent, IEnumerable<FolderAnalyzer<T>> items, int currentLevel, int maxLevel)
-        {            
+        private static IEnumerable<Folder<T>> GetChildFoldersR<T>(Folder<T> parent, IEnumerable<FolderAnalyzer<T>> items, Stack<string> path)
+        {
             List<Folder<T>> results = new List<Folder<T>>();
 
-            results.AddRange(items
+            results
+                .AddRange(items
                 .GroupBy(item => item.Name)
-                .Select(grp => new Folder<T>()
+                .Select(grp => 
                 {
-                    Name = grp.Key,
-                    Items = GetItemsAtDepth(currentLevel, grp)
+                    path.Push(grp.Key);
+
+                    var result = new Folder<T>()
+                    {
+                        Name = grp.Key,
+                        Items = GetItemsAtPath(path, grp)
+                    };                    
+
+                    var nestedItems = grp
+                        .Where(item => item.RemainingFolders.Any())
+                        .Select(item => new FolderAnalyzer<T>
+                        {
+                            Item = item.Item,
+                            Name = item.RemainingFolders.First(),
+                            RemainingFolders = item.RemainingFolders.Skip(1).ToArray()
+                        }).ToArray();
+                    
+                    result.Folders = GetChildFoldersR(result, nestedItems, path);                    
+
+                    path.Pop();
+                    return result;
                 }));
-
-            if (currentLevel < maxLevel)
-            {
-                var nestedItems = items.Select(item => new FolderAnalyzer<T>()
-                {
-                    Item = item.Item,
-                    Name = item.RemainingFolders.First(),
-                    RemainingFolders = item.RemainingFolders.Skip(1)
-                });
-
-                foreach (var folder in results)
-                {
-                    currentLevel++;
-                    folder.Folders = GetChildFoldersR<T>(folder, nestedItems, currentLevel, maxLevel);
-                    currentLevel--;
-                }
-            }
 
             return results;
         }
 
-        private static IEnumerable<T> GetItemsAtDepth<T>(int level, IEnumerable<FolderAnalyzer<T>> items)
-        {
-            return items.Where(item => !item.RemainingFolders.Any()).Select(leaf => leaf.Item);
+        private static IEnumerable<T> GetItemsAtPath<T>(Stack<string> path, IEnumerable<FolderAnalyzer<T>> items)
+        {            
+            return items
+                .Where(item => path.SequenceEqual(item.RemainingFolders))
+                .Select(leaf => leaf.Item).ToArray();
         }
     }
 }
