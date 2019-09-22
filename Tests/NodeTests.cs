@@ -19,8 +19,8 @@ namespace Tests
                 "yambo/yilma/hoopla/thalamus.json"
             };
 
-            var node = items.ToNode((s) => s, '/');
-            Assert.IsTrue(node.Children.Select(nd => nd.Name).SequenceEqual(new string[]
+            var node = items.ToFolder((s) => s, '/');
+            Assert.IsTrue(node.Folders.Select(nd => nd.Name).SequenceEqual(new string[]
             {
                 "this", "yambo"
             }));
