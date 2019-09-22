@@ -27,7 +27,7 @@ namespace NodeBuilder.Library
 
             Folder<T> root = new Folder<T>();
             root.Folders = GetChildFoldersR(root, folderedItems, new Stack<string>());
-            root.Items = GetItemsAtPath(string.Empty, folderedItems);
+            root.Items = GetLeafItems(string.Empty, folderedItems);
             return root;
         }
 
@@ -45,7 +45,7 @@ namespace NodeBuilder.Library
                     var result = new Folder<T>()
                     {
                         Name = grp.Key,
-                        Items = GetItemsAtPath(grp.Key, grp)
+                        Items = GetLeafItems(grp.Key, grp)
                     };                    
 
                     var nestedItems = grp
@@ -66,7 +66,7 @@ namespace NodeBuilder.Library
             return results;
         }
 
-        private static IEnumerable<T> GetItemsAtPath<T>(string folderName, IEnumerable<FolderAnalyzer<T>> items)
+        private static IEnumerable<T> GetLeafItems<T>(string folderName, IEnumerable<FolderAnalyzer<T>> items)
         {            
             return items
                 .Where(item => item.Name.Equals(folderName) && item.RemainingFolders.Count() == 1)
