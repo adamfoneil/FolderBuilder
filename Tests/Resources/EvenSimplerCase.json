@@ -1,0 +1,34 @@
+{
+  "Name": null,
+  "Items": [],
+  "Folders": [
+    {
+      "Name": "this",
+      "Items": [],
+      "Folders": [
+        {
+          "Name": "that",
+          "Items": [
+            "this/that/whatever.jpg",
+            "this/that/yes.docx"
+          ],
+          "Folders": []
+        }
+      ]
+    },
+    {
+      "Name": "that",
+      "Items": [],
+      "Folders": [
+        {
+          "Name": "sorlag",
+          "Items": [
+            "that/sorlag/samzo.json",
+            "that/sorlag/no.txt"
+          ],
+          "Folders": []
+        }
+      ]
+    }
+  ]
+}

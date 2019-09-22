@@ -1,0 +1,77 @@
+{
+  "Name": null,
+  "Items": [],
+  "Folders": [
+    {
+      "Name": "this",
+      "Items": [],
+      "Folders": [
+        {
+          "Name": "that",
+          "Items": [],
+          "Folders": [
+            {
+              "Name": "other",
+              "Items": [
+                "this/that/other/hello.jpg"
+              ],
+              "Folders": []
+            },
+            {
+              "Name": "another",
+              "Items": [
+                "this/that/another/goodbye.jpg"
+              ],
+              "Folders": []
+            }
+          ]
+        },
+        {
+          "Name": "willy",
+          "Items": [],
+          "Folders": [
+            {
+              "Name": "hello",
+              "Items": [
+                "this/willy/hello/thiska.docx"
+              ],
+              "Folders": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "yambo",
+      "Items": [],
+      "Folders": [
+        {
+          "Name": "that",
+          "Items": [],
+          "Folders": [
+            {
+              "Name": "other",
+              "Items": [
+                "yambo/that/other/whenever.txt"
+              ],
+              "Folders": []
+            }
+          ]
+        },
+        {
+          "Name": "yilma",
+          "Items": [],
+          "Folders": [
+            {
+              "Name": "hoopla",
+              "Items": [
+                "yambo/yilma/hoopla/thalamus.json"
+              ],
+              "Folders": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

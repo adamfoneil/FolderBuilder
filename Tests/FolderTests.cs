@@ -1,7 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using NodeBuilder.Library;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Tests
 {
@@ -21,7 +23,8 @@ namespace Tests
             };
 
             var folder = items.ToFolder((s) => s);
-            var json = JsonConvert.SerializeObject(folder);
+            var json = JsonConvert.SerializeObject(folder, Formatting.Indented);
+            Assert.AreEqual(GetEmbeddedResource("Tests.Resources.SimpleCase.json"), json);
         }
 
         [TestMethod]
@@ -36,7 +39,20 @@ namespace Tests
             };
 
             var folder = items.ToFolder((s) => s);
-            var json = JsonConvert.SerializeObject(folder);            
+            var json = JsonConvert.SerializeObject(folder, Formatting.Indented);
+            
+            Assert.AreEqual(GetEmbeddedResource("Tests.Resources.EvenSimplerCase.json"), json);            
+        }
+
+        private string GetEmbeddedResource(string name)
+        {            
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name))
+            {
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
     }
 }
