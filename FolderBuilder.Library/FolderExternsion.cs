@@ -1,9 +1,9 @@
-﻿using NodeBuilder.Library.Model;
+﻿using FolderBuilder.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NodeBuilder.Library
+namespace FolderBuilder.Library
 {
     public static class FolderExtension
     {

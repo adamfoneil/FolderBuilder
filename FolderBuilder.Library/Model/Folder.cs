@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NodeBuilder.Library.Model
+namespace FolderBuilder.Library.Model
 {
     public class Folder<T>
     {

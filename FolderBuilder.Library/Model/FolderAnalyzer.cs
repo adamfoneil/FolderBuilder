@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NodeBuilder.Library.Model
+namespace FolderBuilder.Library.Model
 {
     internal class FolderAnalyzer<T>
     {        
