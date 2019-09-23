@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace FolderBuilder.Library.Model
+namespace FolderBuilder.Library.Internal
 {
     internal class FolderAnalyzer<T>
     {        

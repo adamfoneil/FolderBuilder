@@ -1,4 +1,5 @@
-﻿using FolderBuilder.Library.Model;
+﻿using FolderBuilder.Library.Internal;
+using FolderBuilder.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
