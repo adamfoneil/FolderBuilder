@@ -21,7 +21,7 @@ namespace Tests
                 "yambo/yilma/hoopla/thalamus.json"
             };
 
-            var folder = items.ToFolder((s) => s);
+            var folder = items.ToFolderStructure((s) => s);
             var json = JsonConvert.SerializeObject(folder, Formatting.Indented);
             Assert.AreEqual(GetEmbeddedResource("Tests.Resources.SimpleCase.json"), json);
         }
@@ -37,7 +37,7 @@ namespace Tests
                 "that/sorlag/no.txt"
             };
 
-            var folder = items.ToFolder((s) => s);
+            var folder = items.ToFolderStructure((s) => s);
             var json = JsonConvert.SerializeObject(folder, Formatting.Indented);
             
             Assert.AreEqual(GetEmbeddedResource("Tests.Resources.EvenSimplerCase.json"), json);            

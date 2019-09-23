@@ -7,7 +7,7 @@ namespace FolderBuilder.Library
 {
     public static class FolderExtension
     {
-        public static Folder<T> ToFolder<T>(this IEnumerable<T> items, Func<T, string> pathAccessor, params char[] pathSeparators)
+        public static Folder<T> ToFolderStructure<T>(this IEnumerable<T> items, Func<T, string> pathAccessor, params char[] pathSeparators)
         {
             if (!pathSeparators?.Any() ?? true) pathSeparators = new char[] { '\\', '/', ':' };
 
