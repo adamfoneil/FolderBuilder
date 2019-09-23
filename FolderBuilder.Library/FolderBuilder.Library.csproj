@@ -10,6 +10,14 @@
     <Description>ToFolderStructure&lt;T&gt; extension method for converting a flat list of T into a hierarchical list of Folder&lt;T&gt;</Description>
     <PackageProjectUrl>https://github.com/adamosoftware/FolderBuilder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/adamosoftware/FolderBuilder</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
