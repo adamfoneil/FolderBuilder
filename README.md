@@ -4,7 +4,7 @@ This will have a role in my upcoming **SqlChartify** app, but this requirement c
 
 Here is the method itself: [ToFolderStructure](https://github.com/adamosoftware/FolderBuilder/blob/master/FolderBuilder.Library/FolderExtension.cs#L10).
 
-Here are some test cases that show what it's meant to do. The tests rely on text comparison with some json content, which is [here](https://github.com/adamosoftware/FolderBuilder/tree/master/Tests/Resources) as embedded resources.
+Here are some [test cases](https://github.com/adamosoftware/FolderBuilder/blob/master/Tests/FolderTests.cs) that show what it's meant to do. The tests rely on text comparison with some json content, which is [here](https://github.com/adamosoftware/FolderBuilder/tree/master/Tests/Resources) as embedded resources.
 
 To make it more visually obvious what this does, I added a [WinForms](https://github.com/adamosoftware/FolderBuilder/tree/master/WinFormsTest) project using a TreeView control.
 
