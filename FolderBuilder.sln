@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FolderBuilder.Library", "FolderBuilder.Library\FolderBuilder.Library.csproj", "{F418F750-4B01-4D1C-9F51-C6579303F13B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsTest", "WinFormsTest\WinFormsTest.csproj", "{1B9CED08-48E8-44FE-8ED2-8CBBC48B6C10}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F418F750-4B01-4D1C-9F51-C6579303F13B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F418F750-4B01-4D1C-9F51-C6579303F13B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F418F750-4B01-4D1C-9F51-C6579303F13B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B9CED08-48E8-44FE-8ED2-8CBBC48B6C10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B9CED08-48E8-44FE-8ED2-8CBBC48B6C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B9CED08-48E8-44FE-8ED2-8CBBC48B6C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B9CED08-48E8-44FE-8ED2-8CBBC48B6C10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

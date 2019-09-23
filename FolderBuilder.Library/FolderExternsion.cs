@@ -9,7 +9,7 @@ namespace FolderBuilder.Library
     {
         public static Folder<T> ToFolderStructure<T>(this IEnumerable<T> items, Func<T, string> pathAccessor, params char[] pathSeparators)
         {
-            if (!pathSeparators?.Any() ?? true) pathSeparators = new char[] { '\\', '/', ':' };
+            if (!pathSeparators?.Any() ?? true) pathSeparators = new char[] { '\\', '/' };
 
             var folderedItems = items.Select(item =>
             {
