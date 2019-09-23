@@ -16,3 +16,15 @@ var files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
 var fileInfos = files.Select(fileName => new FileInfo(fileName));
 var fileTree = fileInfos.ToFolderStructure((fi) => fi.FullName);
 ```
+Clicking on a node in the tree view shows the corresponding file properties in the property grid control on the right. Note how the property grid `SelectedObject` comes from the node's [FileInfo property](https://github.com/adamosoftware/FolderBuilder/blob/master/WinFormsTest/Controls/FileNode.cs#L16). Note also the icons are built using my [WinForms.Library](https://github.com/adamosoftware/WinForms.Library) project [AddIcon](https://github.com/adamosoftware/WinForms.Library/blob/master/WinForms.Library/FileSystem_Icons.cs#L92) method.
+```
+private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e)
+{
+    var fileNode = e.Node as FileNode;
+    if (fileNode != null)
+    {
+        propertyGrid1.SelectedObject = fileNode.FileInfo;
+    }            
+}
+```
+
