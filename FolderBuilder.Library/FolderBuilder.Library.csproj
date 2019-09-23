@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Adam O'Neil</Authors>
+    <Company>Adam O'Neil</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>FolderBuilder.Library</PackageId>
+    <Copyright>Copyright (c) 2019 Adam O'Neil</Copyright>
+    <Description>ToFolderStructure&lt;T&gt; extension method for converting a flat list of T into a hierarchical list of Folder&lt;T&gt;</Description>
+    <PackageProjectUrl>https://github.com/adamosoftware/FolderBuilder</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/adamosoftware/FolderBuilder</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
