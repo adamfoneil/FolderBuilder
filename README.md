@@ -1,5 +1,7 @@
 I wanted to build a standard way of converting a flat list of `T` into a hierarchical list based on some kind of `path` contained in `T`. A typical example would be to take a list of file names, and derive a tree structure of that list. However, this is intended to work with any data that has path info, not just file names.
 
+Nuget package: **FolderBuilder.Library**
+
 This will have a role in my upcoming **SqlChartify** app, but this requirement comes up every now and then in other places, so I wanted to make this an open source library (and Nuget package eventually). As usual with things like this, this is both a learning exercise for myself and something with a practical intended use. I struggle with recursion-based things like this, and I found it a difficult and worthwhile exercise.
 
 Here is the method itself: [ToFolderStructure](https://github.com/adamosoftware/FolderBuilder/blob/master/FolderBuilder.Library/FolderExtension.cs#L10).
