@@ -38,9 +38,26 @@ namespace Tests
             };
 
             var folder = items.ToFolderStructure((s) => s);
+            var json = JsonConvert.SerializeObject(folder, Formatting.Indented);            
+            Assert.AreEqual(GetEmbeddedResource("Tests.Resources.EvenSimplerCase.json"), json);
+        }
+
+        [TestMethod]
+        public void WithRootItems()
+        {
+            var items = new string[]
+            {
+                "this/that/whatever.jpg",
+                "this/that/yes.docx",
+                "that/sorlag/samzo.json",
+                "that/sorlag/no.txt",
+                "hapsburg",
+                "shemlorian"
+            };
+
+            var folder = items.ToFolderStructure((s) => s);
             var json = JsonConvert.SerializeObject(folder, Formatting.Indented);
-            
-            Assert.AreEqual(GetEmbeddedResource("Tests.Resources.EvenSimplerCase.json"), json);            
+            Assert.AreEqual(GetEmbeddedResource("Tests.Resources.WithRootItems.json"), json);
         }
 
         private string GetEmbeddedResource(string name)

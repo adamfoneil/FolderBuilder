@@ -9,11 +9,13 @@
   <ItemGroup>
     <None Remove="Resources\EvenSimplerCase.json" />
     <None Remove="Resources\SimpleCase.json" />
+    <None Remove="Resources\WithRootItems.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\EvenSimplerCase.json" />
     <EmbeddedResource Include="Resources\SimpleCase.json" />
+    <EmbeddedResource Include="Resources\WithRootItems.json" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,7 +27,7 @@ namespace FolderBuilder.Library
             }).ToArray();            
 
             Folder<T> root = new Folder<T>();
-            root.Folders = GetChildFoldersR(folderedItems);
+            root.Folders = GetChildFoldersR(folderedItems.Where(item => item.RemainingFolders.Count() > 0));
             root.Items = GetLeafItems(string.Empty, folderedItems);
             return root;
         }
@@ -65,10 +65,14 @@ namespace FolderBuilder.Library
         }
 
         private static IEnumerable<T> GetLeafItems<T>(string folderName, IEnumerable<FolderAnalyzer<T>> items)
-        {            
-            return items
-                .Where(item => item.Name.Equals(folderName) && item.RemainingFolders.Count() == 1)
-                .Select(leaf => leaf.Item).ToArray();                           
+        {
+            return (!string.IsNullOrEmpty(folderName)) ?
+                items
+                    .Where(item => item.Name.Equals(folderName) && item.RemainingFolders.Count() == 1)
+                    .Select(leaf => leaf.Item).ToArray() :
+                items
+                    .Where(item => item.RemainingFolders.Count() == 0)
+                    .Select(leaf => leaf.Item).ToArray();
         }
     }
 }
