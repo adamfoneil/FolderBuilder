@@ -11,6 +11,7 @@
     <PackageProjectUrl>https://github.com/adamosoftware/FolderBuilder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/adamosoftware/FolderBuilder</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
