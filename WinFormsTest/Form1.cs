@@ -1,5 +1,5 @@
 ﻿using FolderBuilder.Library;
-using FolderBuilder.Library.Model;
+using FolderBuilder.Library.Models;
 using System;
 using System.Data;
 using System.IO;
