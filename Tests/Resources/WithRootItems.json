@@ -1,5 +1,6 @@
 {
   "Name": null,
+  "FullName": null,
   "Items": [
     "hapsburg",
     "shemlorian"
@@ -7,10 +8,12 @@
   "Folders": [
     {
       "Name": "this",
+      "FullName": "this",
       "Items": [],
       "Folders": [
         {
           "Name": "that",
+          "FullName": "this/that",
           "Items": [
             "this/that/whatever.jpg",
             "this/that/yes.docx"
@@ -21,10 +24,12 @@
     },
     {
       "Name": "that",
+      "FullName": "that",
       "Items": [],
       "Folders": [
         {
           "Name": "sorlag",
+          "FullName": "that/sorlag",
           "Items": [
             "that/sorlag/samzo.json",
             "that/sorlag/no.txt"

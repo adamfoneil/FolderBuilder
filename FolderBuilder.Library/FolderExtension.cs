@@ -1,5 +1,5 @@
 ﻿using FolderBuilder.Library.Internal;
-using FolderBuilder.Library.Model;
+using FolderBuilder.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +8,12 @@ namespace FolderBuilder.Library
 {
     public static class FolderExtension
     {
-        public static Folder<T> ToFolderStructure<T>(this IEnumerable<T> items, Func<T, string> pathAccessor, params char[] pathSeparators)
+        public static Folder<T> ToFolderStructure<T>(this IEnumerable<T> items, Func<T, string> pathAccessor, char pathSeparator = '/')
         {
-            if (!pathSeparators?.Any() ?? true) pathSeparators = new char[] { '\\', '/' };
-
             var folderedItems = items.Select(item =>
             {
                 var folders = pathAccessor
-                    .Invoke(item).Split(pathSeparators, StringSplitOptions.RemoveEmptyEntries)
+                    .Invoke(item).Split(new char[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(folder => folder.Trim());
 
                 return new FolderAnalyzer<T>()
@@ -27,12 +25,12 @@ namespace FolderBuilder.Library
             }).ToArray();            
 
             Folder<T> root = new Folder<T>();
-            root.Folders = GetChildFoldersR(folderedItems.Where(item => item.RemainingFolders.Count() > 0));
+            root.Folders = GetChildFoldersR(folderedItems.Where(item => item.RemainingFolders.Count() > 0), null, pathSeparator);
             root.Items = GetLeafItems(string.Empty, folderedItems);
             return root;
         }
 
-        private static IEnumerable<Folder<T>> GetChildFoldersR<T>(IEnumerable<FolderAnalyzer<T>> items)
+        private static IEnumerable<Folder<T>> GetChildFoldersR<T>(IEnumerable<FolderAnalyzer<T>> items, string parentName, char pathSeparator)
         {
             List<Folder<T>> results = new List<Folder<T>>();
 
@@ -44,6 +42,7 @@ namespace FolderBuilder.Library
                     var result = new Folder<T>()
                     {
                         Name = grp.Key,
+                        FullName = string.IsNullOrEmpty(parentName) ? grp.Key : parentName + pathSeparator + grp.Key,
                         Items = GetLeafItems(grp.Key, grp)
                     };                    
 
@@ -56,7 +55,7 @@ namespace FolderBuilder.Library
                             RemainingFolders = item.RemainingFolders.Skip(1).ToArray()
                         }).ToArray();
                     
-                    result.Folders = GetChildFoldersR(nestedItems);                    
+                    result.Folders = GetChildFoldersR(nestedItems, result.FullName, pathSeparator);
                     
                     return result;
                 }));

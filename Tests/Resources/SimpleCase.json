@@ -1,17 +1,21 @@
 {
   "Name": null,
+  "FullName": null,
   "Items": [],
   "Folders": [
     {
       "Name": "this",
+      "FullName": "this",
       "Items": [],
       "Folders": [
         {
           "Name": "that",
+          "FullName": "this/that",
           "Items": [],
           "Folders": [
             {
               "Name": "other",
+              "FullName": "this/that/other",
               "Items": [
                 "this/that/other/hello.jpg"
               ],
@@ -19,6 +23,7 @@
             },
             {
               "Name": "another",
+              "FullName": "this/that/another",
               "Items": [
                 "this/that/another/goodbye.jpg"
               ],
@@ -28,10 +33,12 @@
         },
         {
           "Name": "willy",
+          "FullName": "this/willy",
           "Items": [],
           "Folders": [
             {
               "Name": "hello",
+              "FullName": "this/willy/hello",
               "Items": [
                 "this/willy/hello/thiska.docx"
               ],
@@ -43,14 +50,17 @@
     },
     {
       "Name": "yambo",
+      "FullName": "yambo",
       "Items": [],
       "Folders": [
         {
           "Name": "that",
+          "FullName": "yambo/that",
           "Items": [],
           "Folders": [
             {
               "Name": "other",
+              "FullName": "yambo/that/other",
               "Items": [
                 "yambo/that/other/whenever.txt"
               ],
@@ -60,10 +70,12 @@
         },
         {
           "Name": "yilma",
+          "FullName": "yambo/yilma",
           "Items": [],
           "Folders": [
             {
               "Name": "hoopla",
+              "FullName": "yambo/yilma/hoopla",
               "Items": [
                 "yambo/yilma/hoopla/thalamus.json"
               ],
